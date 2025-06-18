@@ -1,4 +1,4 @@
-# Research Assistant Agent
+# Research Agent
 
 **[!] THIS TOOL EXECUTES ARBITRARY CODE - USE ONLY IN SECURE, CONTROLLED ENVIRONMENTS [!]**
 
