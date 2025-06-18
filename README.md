@@ -119,8 +119,6 @@ Step 3/3: PDF Generator creating "Research_Report_2024.pdf" with 3 sections and 
 research-assistant/
 ├── src/
 │   ├── ResearchAssistant.py       # Main application
-├── docs/
-│   └── research_workflow.png      # Workflow diagram
 ├── requirements.txt
 └── README.md
 ```

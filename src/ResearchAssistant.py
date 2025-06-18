@@ -1,6 +1,6 @@
-# https://github.com/jkmaina/LangGraphProjects/blob/main/chapter13/lesson13a.py
 # This is a Research Assistant application that uses LangGraph to coordinate multiple agents
 # for conducting research, and producing PDF reports.
+import getpass
 import os
 import logging
 import functools
@@ -49,7 +49,7 @@ def agent_node(state, agent, name):
         "messages": [HumanMessage(content=result["messages"][-1].content, name=name)]
     }
 
-members = ["Researcher", "Coder"]
+members = ["Researcher", "Generator_pdf"]
 
 # Add a PDF generation tool
 @tool
