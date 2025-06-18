@@ -1,4 +1,3 @@
-```markdown src/README.md
 # Research Assistant Agent
 
 **[!] THIS TOOL EXECUTES ARBITRARY CODE - USE ONLY IN SECURE, CONTROLLED ENVIRONMENTS [!]**
@@ -61,8 +60,6 @@ flowchart TB
 
 ```text
 Step 1/2: Researcher searching Tavily for "recent AI advancements"...
-Found 8 sources including arxiv.org/2024.12345 and nature.com/articles/ai-breakthrough
-
 Step 2/2: PDF Generator creating "Research_Report_2024.pdf" with 3 sections and 10 pages of research summary
 ```
 
