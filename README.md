@@ -4,24 +4,11 @@
 
 An AI-powered research assistant using **LangChain** and **LangGraph** frameworks to coordinate agents for research, code generation, and PDF report creation.
 
-![Research Workflow](docs/research_workflow.png)
+
 
 *Example of research workflow execution*
 
-## 1. Important Security Notice
-
-**THIS TOOL EXECUTES USER-SUPPLIED CODE AND CAN MODIFY SYSTEM FILES.**
-
-- [+] Use only in isolated development environments
-- [+] Never run with elevated privileges
-- [+] Monitor all code execution
-- [-] Do not use with untrusted inputs
-- [-] Disable PythonREPLTool if code execution is not required
-- [+] Always review generated code before execution
-
----
-
-## 2. Key Features (Updated)
+## 1. Key Features (Updated)
 
 - **LangChain/LangGraph Integration**:
   - Supervisor agent coordinates task flow using state graphs
@@ -37,28 +24,42 @@ An AI-powered research assistant using **LangChain** and **LangGraph** framework
 
 ---
 
-## 3. Architecture (Updated)
+## 2. Architecture (Updated)
 
 ```mermaid
-graph LR
-    A[User Query] --> B[Research Assistant]
-    B --> C[Research Agent]
-    B --> D[Code Agent]
-    B --> E[PDF Generator]
-    
-    C --> F[Web Search]
-    D --> G[Code Execution]
-    E --> H[PDF Output]
-    
-    style B fill:#f3e5f5
-    style C fill:#e3f2fd
-    style D fill:#fff3e0
-    style E fill:#e8f5e8
-    
-    B --> S[Supervisor Agent]
-    S --> C
-    S --> D
-    S --> E
+%%{init: {'theme': 'neutral'}}%%
+flowchart TB
+    classDef supervisor fill:#e1f5fe,stroke:#01579b,stroke-width:2px
+    classDef agent fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px
+    classDef tool fill:#fff3e0,stroke:#ff6f00,stroke-width:2px
+    classDef decision fill:#fff176,stroke:#ffeb3b,stroke-width:2px
+
+    Start([Start]) -->|User Request| Supervisor:::supervisor
+
+    subgraph MainWorkflow["Research Assistant Workflow"]
+        Supervisor -->|Route to Researcher| Researcher:::agent
+        Researcher -->|Perform Research| TavilySearch:::tool
+        Researcher -->|Return Results| Supervisor
+
+        Supervisor -->|Route to Generator| Generator_pdf:::agent
+        Generator_pdf -->|Generate PDF| PDFTool:::tool
+        Generator_pdf -->|Return PDF| Supervisor
+
+        Supervisor -->|FINISH| End([End])
+    end
+
+    %% Decision logic
+    style Supervisor fill:#e1f5fe,stroke:#01579b
+    Supervisor{{Supervisor Decision}}:::decision
+
+    %% External tool integrations
+    TavilySearch([Tavily Search API]):::tool
+    PDFTool([PDF Generation Tool]):::tool
+
+    %% Styling notes
+    %% Supervisor nodes handle routing decisions
+    %% Agent nodes perform core tasks
+    %% Tool nodes represent external integrations
 ```
 
 **Core Workflow**:
@@ -69,7 +70,7 @@ graph LR
 
 ---
 
-## 4. Quick Start (Updated)
+## 3. Quick Start (Updated)
 
 ### Prerequisites
 
@@ -96,7 +97,7 @@ python src/ResearchAssistant.py "Исследовать квантовые вы�
 
 ---
 
-## 5. Output Examples (New)
+## 4. Output Examples (New)
 
 ```text
 Step 1/3: Researcher searching Tavily for "recent AI advancements"...
@@ -112,7 +113,7 @@ Step 3/3: PDF Generator creating "Research_Report_2024.pdf" with 3 sections and 
 
 ---
 
-## 6. Project Structure (Updated)
+## 5. Project Structure (Updated)
 
 ```text
 research-assistant/
@@ -126,7 +127,7 @@ research-assistant/
 
 ---
 
-## 7. Troubleshooting (Updated)
+## 6. Troubleshooting (Updated)
 
 ### Missing Dependencies
 
@@ -147,7 +148,7 @@ python src/ResearchAssistant.py --no-code-execution "Research request"
 
 ---
 
-## 8. Credits (Updated)
+## 7. Credits (Updated)
 
 - **LangChain** - Agent coordination framework
 - **LangGraph** - Workflow orchestration
