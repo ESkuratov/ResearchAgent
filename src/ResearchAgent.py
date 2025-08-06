@@ -104,7 +104,7 @@ options = ["FINISH"] + members
 
 
 class routeResponse(BaseModel):
-    next: Literal[*options]
+    next: Literal["FINISH", "Researcher", "Generator_pdf"]
 
 
 prompt = ChatPromptTemplate.from_messages(
@@ -171,7 +171,15 @@ graph = workflow.compile()
 for s in graph.stream(
     {
         "messages": [
-            HumanMessage(content="Write a brief pdf research report recent advances in AI and summarize.")
+            HumanMessage(content= """Find 10 new scenarios for the use and implementation of Generative AI in companies over the past month (August 2025). Present the results in a table with the following columns:
+- Date — when the use case was announced or implemented
+- Industry
+- Use Case Description
+- Assessment Summary — include why it’s interesting or innovative
+- Rating (0 to 5) — evaluate usefulness/impact
+- Source Link
+
+Classify the use cases by industry. Choose the most interesting one and explain why it stands out.""")
         ]
     }
 ):
